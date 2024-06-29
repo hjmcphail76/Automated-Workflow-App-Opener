@@ -23,19 +23,18 @@ jobs:
       uses: actions/setup-python@v5
       with:
         python-version: ${{ matrix.version }}
-    - name: Install APT Dependencies (Linux)
-      run:   |
-        if [ "$RUNNER_OS" == "Linux" ]; then sudo apt update; sudo apt install libasound2-dev -y; fi
-      shell: bash
+    - name: Install Pip Dependencies
+      run: python -m pip install --upgrade pip
+    - name: Install AppOpener
+      run: python -m pip install AppOpener
     - name: Install Shiv
-      run: |
-        python -m pip install --upgrade shiv
+      run: python -m pip install --upgrade shiv
     - name: Build/Export
       run: |
-        shiv --site-packages fll_presenter -e main:main -o fll_presenter.pyzw -r requirements.txt
+        shiv -e main:main -o AutomatedAppOpener.pyzw -r <(echo AppOpener)
     - uses: actions/upload-artifact@v4
       with:
-        name: FLL Presenter ${{ matrix.os }} For Python v${{ matrix.version }}
+        name: AutomatedAppOpener ${{ matrix.os }} For Python v${{ matrix.version }}
         path: |
-          ${{github.workspace}}/fll_presenter.pyzw
+          ${{github.workspace}}/AutomatedAppOpener.pyzw
         if-no-files-found: warn
