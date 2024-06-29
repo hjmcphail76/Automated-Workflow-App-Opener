@@ -15,8 +15,11 @@ def open_3d_printing_Workflow():
     open("spotify")
     app.destroy()
 
-function_lst = [open_programming_Workflow, open_3d_printing_Workflow]
-button_names_lst=["Programming Workflow", "3D Printing Workflow"]
+def do_nothing():
+    app.destroy()
+
+function_lst = [open_programming_Workflow, open_3d_printing_Workflow,do_nothing]
+button_names_lst=["Programming Workflow", "3D Printing Workflow","None"]
 button_lst = []
 
 
